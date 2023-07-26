@@ -1,17 +1,24 @@
 const { Router } = require("express");
 const {
+    
     getCountries,
-    getDetailCountryById
+    getDetailCountryById,
+    getCountriesByName,
+    postActivities,
+    getActivities
 } = require('../controllers/index')
+const {setDatabase} = require('../controllers/setDatabase.js')
 
 const router = Router();
 
 router
+.get('/', setDatabase)
 .get('/countries', getCountries)
-.get('/country/:idCountry', getDetailCountryById)
-// .get('/countries/name?="...', getCountriesByName)
-// .get('/activities', getActivities)
-// .post('/activity', postActivity)
+.get('/countries/:idCountry', getDetailCountryById)
+.get('/countries/name', getCountriesByName)
+.post('/activities', postActivities)
+.get('/activities', getActivities)
+
 
 
 module.exports = router;

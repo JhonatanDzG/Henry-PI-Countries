@@ -1,8 +1,15 @@
-const apiDataCountries = require('../../api/db.json');
+const {Country} = require('../db.js')
 
-// Función para obtener todos los países
-const getCountries = (req, res) => {
-    res.json(apiDataCountries);
-  };
-  
-  module.exports = getCountries;
+const getCountries = async (req, res) => {
+  try { 
+    const countries = await Country.findAll();
+
+    return res.json(countries);
+
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'An error occurred while fetching the countries' });
+  }
+};
+
+module.exports = getCountries;
