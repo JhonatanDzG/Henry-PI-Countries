@@ -14,8 +14,8 @@ const router = Router();
 router
 .get('/', setDatabase)
 .get('/countries', getCountries)
-.get('/countries/:idCountry', getDetailCountryById)
 .get('/countries/name', getCountriesByName)
+.get('/countries/:idCountry', getDetailCountryById)
 .post('/activities', postActivities)
 .get('/activities', getActivities)
 
