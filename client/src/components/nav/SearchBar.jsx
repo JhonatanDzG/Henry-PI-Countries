@@ -1,3 +1,4 @@
+import './searchBar.css'
 import React, { useState } from 'react';
 
 export default function SearchBar() {
@@ -15,12 +16,13 @@ export default function SearchBar() {
   return (
     <div className='searchBar-container'>
       <input
+      className='input-search'
         type="text"
         value={searchText}
         onChange={handleInputChange}
         placeholder="Search..."
       />
-      <button onClick={handleSearch}>Search</button>
+      <button className= 'button-search'onClick={handleSearch}>🔎</button>
     </div>
   );
 }

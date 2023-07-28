@@ -1,0 +1,18 @@
+.searchBar-container{
+    margin-right: 5px;
+}
+
+::placeholder {
+    color: #ffffff; /* Cambia el color a rojo (#ff0000), pero puedes usar el color que prefieras */
+  }
+.input-search{
+    height: 35px;
+    border-radius: 9px;
+    background-color: transparent;
+    border-style:double;
+}
+
+.button-search{
+    background-color: transparent;
+
+}
