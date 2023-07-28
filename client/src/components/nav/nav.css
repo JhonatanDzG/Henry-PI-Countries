@@ -1,11 +1,18 @@
 .navBar{
     display: flex;
-    justify-content: flex-end;
     position: fixed;
     top: 0;
-    left: 0;
     width: 100vw;
-    padding: 10px;
+    padding: 0.5rem;
     background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonHome-container{
+    display: flex;
+    border: 1px solid transparent;
+    justify-content: space-evenly;
+    height: 100%;
 }
 

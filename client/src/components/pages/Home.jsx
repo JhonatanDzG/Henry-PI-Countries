@@ -1,15 +1,17 @@
 import React from "react";
-import "../css/home.css"
+import "../css/home.css";
+import Cards from "./cards/Cards";
 
 export default function Home() {
-
-
   return (
-    <div className="homePage-container">
-      <div className="title-container">
-        <h1 className="title">Now you are on the 'Home' page</h1>
-      </div>
 
+    <>
+    if(){}
+    <div className="homePage-container">
+      <div className="cards-container">
+        <Cards />
+      </div>
     </div>
+    </>
   );
 }

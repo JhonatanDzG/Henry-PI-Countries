@@ -1,0 +1,21 @@
+.homePage-container{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+}
+
+.title-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.cards-container{
+    margin: 2rem;
+    margin-top: 9rem;
+    display: flex;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    
+}
