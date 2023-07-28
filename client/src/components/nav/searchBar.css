@@ -1,20 +1,35 @@
-.searchBar-container{
+.searchBar-container {
+    width: 70vw;
     display: flex;
-    align-items: center;
+    align-items:center;
+    justify-content: space-evenly;
 }
 
 ::placeholder {
-    color: #ffffff; /* Cambia el color a rojo (#ff0000), pero puedes usar el color que prefieras */
-  }
-.input-search{
-    height: 35px;
-    border-radius: 9px;
-    background-color: transparent;
-    border-style:double;
+    color: #ffffffb6;
+    /* Cambia el color a rojo (#ff0000), pero puedes usar el color que prefieras */
 }
 
-.button-search{
+.input-search {
+    height: 30px;
+    background-color: rgba(32, 31, 31, 0.719);
+    border: none;
+    border-bottom: 2px solid whitesmoke;
+    padding: 5px;
+    font-size: 16px;
+    outline: none;
+    
+
+}
+
+.button-search {
     background-color: transparent;
-    border-right: 1px solid black;
-    border-radius: 0 ;
+    border-right: 1px solid whitesmoke;
+    border-radius: 0;
+}
+
+.multi-title{
+    display: flex;
+    position: relative;
+    font-size: 10px;
 }

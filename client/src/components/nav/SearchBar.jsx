@@ -20,7 +20,7 @@ export default function SearchBar() {
   const handleTitle = (path) => {
     switch(path){
       case "/home": return(
-        <h1>On HomePage</h1>
+        <h1> World Countries</h1>
       )
       break;
 
@@ -29,16 +29,18 @@ export default function SearchBar() {
 
   return (
     <div className='searchBar-container'>
-      <div className='title'>{handleTitle(pathname)}</div>
+      <div className='multi-title'>{handleTitle(pathname)}</div>
+      <div className='search-container'>
       <input
       className='input-search'
         type="text"
         value={searchText}
         onChange={handleInputChange}
-        placeholder="Search..."
+        placeholder="Try typing... COL  "
       />
       <button className= 'button-search'onClick={handleSearch}>🌎</button>
     </div>
+      </div>
   );
 }
 
