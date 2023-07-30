@@ -10,7 +10,7 @@ export default function LandingPage() {
         <h1>Discover the World in Data</h1>
       </div>
       <div className="button-container">
-        <Link to={"/home"}>
+        <Link to={"/countries"}>
         <button className="button">Countries Information</button>
         </Link>
       </div>
