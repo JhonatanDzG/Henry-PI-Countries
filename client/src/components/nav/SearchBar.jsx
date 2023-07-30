@@ -30,38 +30,18 @@ export default function SearchBar() {
     }
   };
 
-  const handle_SearchBarMutation = (path) => {
-    switch (path) {
-      case "/home":
-        return (
-          <div className="search-container">
-            <input
-              className="input-search"
-              type="text"
-              value={searchText}
-              onChange={handleInputChange}
-              placeholder="Try typing... COL  "
-            />
-            <button className="button-search" onClick={handleSearch}>
-              🌎
-            </button>
-          </div>
-        );
-
-      case "/createActivity":
-        return (
-          <div className="search-container">
-            <div className="title container"></div>
-
-          </div>
-        );
-    }
-  };
-
   return (
-    <div className="searchBar-container">
-      <div className="multi-title">{handle_MultiTitle(pathname)}</div>
-      <div className="SearchBar">{handle_SearchBarMutation(pathname)}</div>
+    <div className="search-container">
+      <input
+        className="input-search"
+        type="text"
+        value={searchText}
+        onChange={handleInputChange}
+        placeholder="Try typing... COL  "
+      />
+      <button className="button-search" onClick={handleSearch}>
+        🌎
+      </button>
     </div>
   );
 }

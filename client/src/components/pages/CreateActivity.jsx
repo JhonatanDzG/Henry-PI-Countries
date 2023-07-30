@@ -1,36 +1,41 @@
 import React from "react";
-import '../css/createActivity.css'
+import "../css/createActivity.css";
 
 export default function CreateActivity() {
   return (
-<div className="createActivity-container">
+    <div className="createActivity-container">
+      <div className="CreateActivity-form-container">
+        <form className="CreateActivity-form" action="/submit" method="post">
+          <div className="text-inputs-container"></div>
 
-    <div className="CreateActivity-form-container">
+          <label htmlFor="Name">Name:</label>
+          <input type="text"  placeholder = "Senderismo en montañas" name="name" required />
 
-    <form className= 'CreateActivity-form' action="/submit" method="post">
-      <label htmlFor="nombre">Nombre:</label>
-      <input type="text" id="nombre" name="nombre" required />
+          <label htmlFor="Difficulty">Difficulty:</label>
+          <input type="number" placeholder = "3" name="difficulty" required />
 
-      <label htmlFor="email">Email:</label>
-      <input type="email" id="email" name="email" required />
+          <label htmlFor="Duration">Duration:</label>
+          <input type="number" placeholder = "4" name="duration" required />
 
-      <label htmlFor="edad">Edad:</label>
-      <input type="number" id="edad" name="edad" required />
+          <label htmlFor="Season">Season:</label>
+          <input type="text" placeholder = "Primavera" name="season" required />
 
-      <label htmlFor="telefono">Teléfono:</label>
-      <input type="tel" id="telefono" name="telefono" required />
-
-      <input type="submit" value="Enviar" />
-    </form>
-
+          <label htmlFor="countryIds">countryIds:</label>
+          <input type="text" placeholder = "COL" name="countryIds" required />
+          <br />
+          <input type="submit" value="Send" />
+        </form>
+      </div>
     </div>
-</div>
-
   );
 }
 
-
-
-
-
-
+/*
+{
+  "name": "Senderismo en montañas",
+  "difficulty": 4,
+  "duration": 3,
+  "season": "Primavera",
+  "countryIds": "KEN"
+}
+*/
