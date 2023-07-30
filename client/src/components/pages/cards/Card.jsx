@@ -3,21 +3,19 @@ import { Link } from "react-router-dom";
 
 export default function Card({country}) {
   
-  const {id, name, flagImage, continent, capital, subregion, area, population} = country
+  const {id, name, flagImage, continent} = country
 
   return (
     <div className="card">
-      {/* <button className = "CloseCard" onClick={() => onClose(id)}>X</button> */}
       
       <img src={flagImage}/>
+    <div className="info">
       <Link to={`/detail/${id}`}>
-      <h2>{name}</h2>
+      <h3>{name}</h3>
       </Link>
-      <h2>{continent}</h2>
-      <h2>{capital}</h2> 
-      <h2>{subregion}</h2>
-      <h2>{area}</h2>
-      <h2>{population}</h2>
+      <h4>{continent}</h4>
+    </div>
+
     </div>
   );
 }
