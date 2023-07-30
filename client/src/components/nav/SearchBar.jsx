@@ -19,12 +19,14 @@ export default function SearchBar() {
 
   const handle_MultiTitle = (path) => {
     switch (path) {
-      case "/home":
-        return <h1> World Countries</h1>;
-        break;
       case "/createActivity":
-        return <h1> Complete the Form</h1>;
+        return (<h1> Complete the Form</h1>)
+      case "/home":
+        return (<h1> World Countriessss</h1>);
         break;
+
+        default: 
+        return <h1>Default</h1> 
     }
   };
 
@@ -49,6 +51,7 @@ export default function SearchBar() {
       case "/createActivity":
         return (
           <div className="search-container">
+            <div className="title container"></div>
 
           </div>
         );

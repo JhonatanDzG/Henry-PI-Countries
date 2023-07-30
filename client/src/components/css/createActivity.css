@@ -1,3 +1,32 @@
 .createActivity-container{
+    height: 100vh;
     width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+
+.CreateActivity-form-container{
+    height: 60vh;
+    width: 30vw;
+    display: flex;
+    align-items: center;   
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    margin-top: 9rem;
+}
+
+.CreateActivity-form{
+    display: flex;
+    flex-direction: column;
+
+}
+
+input{
+    height: 30px;
+    background-color: rgba(32, 31, 31, 0.719);
+    border: none;
+    border-bottom: 2px solid whitesmoke;
+    padding: 5px;
+    font-size: 16px;
+    outline: none;
 }

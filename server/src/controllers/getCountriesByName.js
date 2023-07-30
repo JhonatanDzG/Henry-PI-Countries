@@ -19,18 +19,11 @@ const getCountriesByName = async (req, res) => {
       },
     });
 
-    //Si el parámetro coincide exactamente con una ID de tres letras de algún país
-    const countryById = await Country.findOne({
-      where: {
-        id: name.toUpperCase(),
-      },
-    });
-
-    if (!countriesByName.length && !countryById) {
-      return res.status(404).json({ error: 'No countries found with the provided name or ID' });
+    if (!countriesByName.length) {
+      return res.status(404).json({ error: 'No countries found with the provided name' });
     }
 
-    return res.json({ countriesByName, countryById });
+    return res.json(countriesByName);
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: 'An error occurred while fetching the countries' });

@@ -15,7 +15,7 @@ router
 .get('/', setDatabase)
 .get('/countries', getCountries)
 .get('/countries/name', getCountriesByName)
-.get('/countries/:idCountry', getDetailCountryById)
+.get('/country/:idCountry', getDetailCountryById)
 .post('/activities', postActivities)
 .get('/activities', getActivities)
 

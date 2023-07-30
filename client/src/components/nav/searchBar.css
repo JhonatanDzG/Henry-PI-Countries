@@ -28,6 +28,11 @@
     border-radius: 0;
 }
 
+.title-container{
+    display: flex;
+    flex-direction: column;
+}
+
 .multi-title{
     display: flex;
     position: relative;
