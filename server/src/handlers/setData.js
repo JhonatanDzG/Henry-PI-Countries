@@ -1,8 +1,12 @@
 const {Country} = require('../db.js')
 
+
+
+
 const mapDataToCountryModel = async (data) => {
 
-    const countries = data.countries.map((countryData) => {
+
+    const countries = data.map((countryData) => {
       const {
         cca3: id,
         name: { common: name },

@@ -62,18 +62,14 @@ export default function CreateActivity() {
             name="countryIds"
             onChange={handleChange}
             required
-            list="countrySuggestions"
           />
-          <datalist id="countrySuggestions" >
-            <option value="Colombia" />
-            <option value="Costa Rica" />
-            <option value="Chile" />
-          </datalist>
+
           <br />
-          <input type="submit" value="Send" />
+          <input type="submit" value="Send" onSubmit={console.log(formData)}/>
         </form>
       </div>
     </div>
+
   );
 }
 
