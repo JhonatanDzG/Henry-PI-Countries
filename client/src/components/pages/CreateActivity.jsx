@@ -1,27 +1,74 @@
 import React from "react";
 import "../css/createActivity.css";
+import { useState } from "react";
 
 export default function CreateActivity() {
+  const [formData, setFormData] = useState({
+    name: "",
+    difficulty: "",
+    duration: "",
+    season: "",
+    countryIds: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Aquí puedes acceder a los valores ingresados por el usuario en formData
+    console.log(formData);
+    // Aquí puedes enviar los datos al servidor o hacer cualquier otra acción
+  };
+
   return (
     <div className="createActivity-container">
       <div className="CreateActivity-form-container">
-        <form className="CreateActivity-form" action="/submit" method="post">
+        <form
+          className="CreateActivity-form"
+          onSubmit={handleSubmit}
+          method="post"
+        >
           <div className="text-inputs-container"></div>
 
           <label htmlFor="Name">Name:</label>
-          <input type="text"  placeholder = "Senderismo en montañas" name="name" required />
+          <input
+            type="text"
+            placeholder="Senderismo en montañas"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
 
           <label htmlFor="Difficulty">Difficulty:</label>
-          <input type="number" placeholder = "3" name="difficulty" required />
+          <input type="number" placeholder="3" name="difficulty" value={formData.difficulty} onChange={handleChange} required />
 
           <label htmlFor="Duration">Duration:</label>
-          <input type="number" placeholder = "4" name="duration" required />
+          <input type="number" placeholder="4" name="duration" value={formData.duration} onChange={handleChange} required />
 
           <label htmlFor="Season">Season:</label>
-          <input type="text" placeholder = "Primavera" name="season" required />
+          <input type="text" placeholder="Primavera" name="season" value={formData.season} onChange={handleChange} required />
 
           <label htmlFor="countryIds">countryIds:</label>
-          <input type="text" placeholder = "COL" name="countryIds" required />
+          <input
+            type=""
+            placeholder="COL"
+            name="countryIds"
+            onChange={handleChange}
+            required
+            list="countrySuggestions"
+          />
+          <datalist id="countrySuggestions" >
+            <option value="Colombia" />
+            <option value="Costa Rica" />
+            <option value="Chile" />
+          </datalist>
           <br />
           <input type="submit" value="Send" />
         </form>

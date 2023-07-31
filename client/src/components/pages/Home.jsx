@@ -3,8 +3,11 @@ import "../css/home.css";
 import { connect } from "react-redux";
 import { getCountries } from "../../store/actions";
 import Card from "./cards/Card";
+import Pagination from "../organisms/Pagination";
+import NoResults from "./cards/NoResults";
 
 function Home({ countries, getCountries }) {
+
   useEffect(() => {
     async function dispatchCountries() {
       return await getCountries();
@@ -15,11 +18,14 @@ function Home({ countries, getCountries }) {
   return (
     <div className="homePage-container">
       <div className="cards-container">
-          {countries
-            ? countries.map((c) => {
-                return  <Card key={c.id} country={c}/>;
-              })
-            : "loading..."}
+        {countries.length
+          ? countries.map((c) => {
+              return <Card key={c.id} country={c} />;
+            })
+          : <NoResults/>}
+      </div>
+      <div className="pagination">
+      <Pagination />
       </div>
     </div>
   );
@@ -33,7 +39,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getCountries: async () => dispatch(await getCountries()),
+    getCountries: async (page) => dispatch(await getCountries(page)),
   };
 }
 

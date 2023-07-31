@@ -2,7 +2,9 @@ import { ACTIONS } from "../constants/action.constant";
 
 const initialState = {
   countries: [],
-  country: [],
+  country: {},
+  pages: 0,
+  search: "",
 };
 
 const reducer = (state = initialState, action) => {
@@ -10,11 +12,35 @@ const reducer = (state = initialState, action) => {
     case ACTIONS.getCountries:
       return {
         ...state,
-        countries: action.payload,
-      }
-      default:
-      return state
+        countries: action.payload.countries,
+        pages: action.payload.pages,
+      };
+
+      case ACTIONS.getCountry:
+        return {
+          ...state,
+          country: action.payload
+        }
+
+      case ACTIONS.clearCountry:
+        return {
+          ...state,
+          country: {}
+        }
+
+        case ACTIONS.search:
+          return {
+            ...state,
+            countries: action.payload.countries,
+            search: action.payload.search,
+            pages: action.payload.pages,
+          }
+
+    default:
+      return state;
   }
 };
 
 export default reducer;
+
+

@@ -1,12 +1,14 @@
 .navBar{
     display: flex;
-    position: fixed;
+    position: sticky;
     top: 0;
     width: 100%;
     padding: 0.5rem;
     background-color: rgba(0, 0, 0, 0.5);
     justify-content: space-around;
     align-items: center;
+    margin-bottom: 2rem;
+    z-index: 100;
 }
 
 .buttonHome-container{

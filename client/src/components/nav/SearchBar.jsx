@@ -1,33 +1,12 @@
 import "./searchBar.css";
-import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { connect } from "react-redux";
+import { searchCountries } from "../../store/actions"
 
 
-export default function SearchBar() {
-  const [searchText, setSearchText] = useState("");
+ function SearchBar({search}) {
 
-  const handleInputChange = (event) => {
-    setSearchText(event.target.value);
-  };
-
-  const handleSearch = () => {
-    //búscar con el valor: searchText
-    console.log("Buscando:", searchText);
-  };
-
-  const { pathname } = useLocation();
-
-  const handle_MultiTitle = (path) => {
-    switch (path) {
-      case "/createActivity":
-        return (<h1> Complete the Form</h1>)
-      case "/home":
-        return (<h1> World Countriessss</h1>);
-        break;
-
-        default: 
-        return <h1>Default</h1> 
-    }
+  const handleInputChange = async(event) => {
+   await search(event.target.value.trim());
   };
 
   return (
@@ -35,13 +14,17 @@ export default function SearchBar() {
       <input
         className="input-search"
         type="text"
-        value={searchText}
         onChange={handleInputChange}
-        placeholder="Try typing... COL  "
+        placeholder="Try typing... COL"
       />
-      <button className="button-search" onClick={handleSearch}>
-        🌎
-      </button>
     </div>
   );
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return{
+    search: async (search) => dispatch(await searchCountries(search))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(SearchBar) ;
