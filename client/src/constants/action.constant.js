@@ -3,6 +3,7 @@ export const ACTIONS = {
     getCountry:" [COUNTRY] Get Country",
     getPage: "[PAGINATION] Get Pagination",
     search: "[COUNTRIES] search",
-    clearCountry: "[COUNTRY] Clear"
+    clearCountry: "[COUNTRY] Clear",
+    createActivity: "[ACTIVITY] create"
 }
 

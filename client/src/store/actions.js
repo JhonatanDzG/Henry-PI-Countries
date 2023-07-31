@@ -5,7 +5,7 @@ const URL = import.meta.env.VITE_APP_URL;
 
 export const getCountries = async (page=0, search = "") => {
 
-  const {data:  payload} = await axios.get(`${URL}countries?skip=${page}`);
+  const {data:  payload} = await axios.get(`${URL}countries?skip=${page}&search${search}`);
 
   return {
     payload,
@@ -41,3 +41,15 @@ export const searchCountries = async(search) => {
   }
 
 }
+
+export const createActivity = async (activity)  =>{
+
+const {data: payload} = await axios.post(`${URL}activity`, activity)
+
+
+  return {
+   payload,
+   type: ACTIONS.createActivity
+  }
+ }
+

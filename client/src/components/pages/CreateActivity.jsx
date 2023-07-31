@@ -21,9 +21,7 @@ export default function CreateActivity() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aquí puedes acceder a los valores ingresados por el usuario en formData
-    console.log(formData);
-    // Aquí puedes enviar los datos al servidor o hacer cualquier otra acción
+    console.log(formData)
   };
 
   return (
@@ -34,6 +32,7 @@ export default function CreateActivity() {
           onSubmit={handleSubmit}
           method="post"
         >
+          <h1 className="title-form">Activity Creation</h1>
           <div className="text-inputs-container"></div>
 
           <label htmlFor="Name">Name:</label>
@@ -46,11 +45,11 @@ export default function CreateActivity() {
             required
           />
 
-          <label htmlFor="Difficulty">Difficulty:</label>
-          <input type="number" placeholder="3" name="difficulty" value={formData.difficulty} onChange={handleChange} required />
+          <label htmlFor="Difficulty">Difficulty/1-15:</label>
+          <input type="number" placeholder="3" name="difficulty" value={formData.difficulty} min="1" max="15" onChange={handleChange} required />
 
-          <label htmlFor="Duration">Duration:</label>
-          <input type="number" placeholder="4" name="duration" value={formData.duration} onChange={handleChange} required />
+          <label htmlFor="Duration">Duration/hours:</label>
+          <input type="number" placeholder="4" name="duration" min="0" value={formData.duration} onChange={handleChange} required />
 
           <label htmlFor="Season">Season:</label>
           <input type="text" placeholder="Primavera" name="season" value={formData.season} onChange={handleChange} required />
@@ -65,7 +64,7 @@ export default function CreateActivity() {
           />
 
           <br />
-          <input type="submit" value="Send" onSubmit={console.log(formData)}/>
+          <input type="submit" value="Send" />
         </form>
       </div>
     </div>
@@ -73,12 +72,4 @@ export default function CreateActivity() {
   );
 }
 
-/*
-{
-  "name": "Senderismo en montañas",
-  "difficulty": 4,
-  "duration": 3,
-  "season": "Primavera",
-  "countryIds": "KEN"
-}
-*/
+

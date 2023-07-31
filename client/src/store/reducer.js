@@ -5,6 +5,7 @@ const initialState = {
   country: {},
   pages: 0,
   search: "",
+
 };
 
 const reducer = (state = initialState, action) => {
@@ -35,6 +36,12 @@ const reducer = (state = initialState, action) => {
             search: action.payload.search,
             pages: action.payload.pages,
           }
+
+          
+          case ACTIONS.createActivity:
+            return {
+              ...state,
+            };
 
     default:
       return state;

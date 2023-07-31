@@ -1,30 +1,33 @@
-.createActivity-container{
-    height: 100vh;
-    width: 100vw;
+.createActivity-container {
+    width: 100%;
+    height: 100%;
+    margin: auto;
     display: flex;
+    align-items: center;
     justify-content: center;
 }
 
-.CreateActivity-form-container{
-    height: 60vh;
-    width: 30vw;
+.CreateActivity-form-container {
+    height: 500px;
+    max-width: 30vw;
+    min-width: 300px;
     display: flex;
-    align-items: center;   
+    align-items: center;
     justify-content: center;
     background-color: #00000099;
-    margin-top: 9rem;
     border-radius: 8px;
     backdrop-filter: blur(3px);
-
+    margin-top: 1rem;
 }
 
-.CreateActivity-form{
+.CreateActivity-form {
     display: flex;
     flex-direction: column;
+    width: 90%;
 
 }
 
-input{
+input {
     height: 30px;
     background-color: rgba(32, 31, 31, 0.719);
     border: none;
@@ -32,4 +35,18 @@ input{
     padding: 5px;
     font-size: 16px;
     outline: none;
+    transition: border-bottom-color 0.3s ease;
+    margin: 5px;
+    display: flex;
+
+}
+
+
+
+
+
+
+.title-form {
+    font-size: 30px;
+    margin-bottom: 20px;
 }
