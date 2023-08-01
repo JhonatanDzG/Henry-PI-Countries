@@ -1,3 +1,9 @@
 .pagination{
     margin: 10px auto;
 }
+
+.pagination-bt{
+    background: #00000099;
+    margin: 2px;
+    cursor: pointer;
+}

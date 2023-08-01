@@ -6,6 +6,7 @@ const getCountriesByName = async (req, res) => {
   try {
     const { name } = req.query;
 
+    //Validar query
     if (!name || name.trim() === '') {
       return res.status(400).json({ error: 'Please provide a valid country name' });
     }
@@ -19,10 +20,12 @@ const getCountriesByName = async (req, res) => {
       },
     });
 
+    // En caso de no encontrar ninguno...
     if (!countriesByName.length) {
       return res.status(404).json({ error: 'No countries found with the provided name' });
     }
 
+    //Devolver...
     return res.json(countriesByName);
   } catch (error) {
     console.error(error);

@@ -5,8 +5,6 @@ import { Link, useLocation } from "react-router-dom";
 import { ROUTES } from "../../constants/routes.constant";
 
 export default function Nav({ onSearch }) {
-
-
   return (
     <div className="navBar">
       <div className="buttonHome-container">

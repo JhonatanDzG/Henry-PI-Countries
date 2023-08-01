@@ -28,25 +28,39 @@
 }
 
 input {
-    height: 30px;
-    background-color: rgba(32, 31, 31, 0.719);
+    height: 40px;
+    background-color: #00000099;
     border: none;
-    border-bottom: 2px solid whitesmoke;
     padding: 5px;
     font-size: 16px;
     outline: none;
     transition: border-bottom-color 0.3s ease;
     margin: 5px;
     display: flex;
-
+    font-size: 15px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
 }
 
+select {
+    height: 40px;
+    background-color: #00000099;
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 5px;
 
-
-
-
+}
 
 .title-form {
     font-size: 30px;
     margin-bottom: 20px;
+}
+
+.submit{
+    display: flex;
+    width: 100%;
+    justify-content: center;
 }

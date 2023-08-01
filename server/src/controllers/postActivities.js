@@ -21,6 +21,7 @@ const postActivities = async (req, res) => {
       await activity.setCountries(countries);
     }
 
+    //Devolver...
     return res.status(201).json({ message: 'Activity created successfully', activity });
   } catch (error) {
     console.error(error);

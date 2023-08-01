@@ -5,6 +5,7 @@ import { getCountries } from "../../store/actions";
 import Card from "./cards/Card";
 import Pagination from "../organisms/Pagination";
 import NoResults from "./cards/NoResults";
+import Filters from "../organisms/FiltersComponent";
 
 function Home({ countries, getCountries }) {
 
@@ -17,10 +18,13 @@ function Home({ countries, getCountries }) {
 
   return (
     <div className="homePage-container">
+      <div className="filters">
+        <Filters/>
+      </div>
       <div className="cards-container">
         {countries.length
           ? countries.map((c) => {
-              return <Card key={c.id} country={c} />;
+              return <Card key={c.name} country={c} />;
             })
           : <NoResults/>}
       </div>

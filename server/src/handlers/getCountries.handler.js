@@ -1,7 +1,9 @@
-const {Country} = require('../db.js')
+const { Country } = require("../db.js");
 
-const getCountries = async() => {
-    return await Country.findAll();
-}
+//Buscar Paises desde el model Country
+const getCountries = async () => {
+  //Devolver...
+  return await Country.findAll();
+};
 
-module.exports={ getCountries }
+module.exports = { getCountries };

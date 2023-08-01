@@ -1,28 +1,9 @@
 const { Country } = require("../db.js");
 const { Op } = require("sequelize");
 
-const getCountries = async (req, res) => {
-  const { skip, search, order } = req.query;
-
-  let searchParams = {};
+const getCountriesByFilters = async (req, res) => {
+  const { skip, search, filters } = req.query;
   const limit = 15;
-
-  if (search) {
-    searchParams = {
-      where: {
-        name: {
-          [Op.iLike]: `%${search}%`,
-        },
-      },
-    };
-  }
-
-  if (order) {
-    searchParams = {
-      ...searchParams,
-      order: [["name", order]],
-    };
-  }
 
   try {
     const count = await Country.count({ ...searchParams });
@@ -42,4 +23,4 @@ const getCountries = async (req, res) => {
   }
 };
 
-module.exports = getCountries;
+module.exports = getCountriesByFilters;
