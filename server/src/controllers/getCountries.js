@@ -1,8 +1,8 @@
-const { Country } = require("../db.js");
+const { Country, Activity } = require("../db.js");
 const { Op } = require("sequelize");
 
 const getCountries = async (req, res) => {
-  const { skip, search, order } = req.query;
+  const { skip, search, order, continent, activity } = req.query;
 
   let searchParams = {};
   const limit = 15;
@@ -24,7 +24,30 @@ const getCountries = async (req, res) => {
     };
   }
 
+  if (continent) {
+    searchParams = {
+      ...searchParams,
+      where: {
+        ...searchParams.where,
+        continent,
+      },
+    };
+  }
+
+  if (activity) {
+    searchParams = {
+      include: {
+        model: Activity,
+        where: {
+          id: activity,
+        }, as: "Activities"
+      },
+    };
+  }
+
   try {
+    console.log("searchParams", searchParams);
+
     const count = await Country.count({ ...searchParams });
     const pages = Math.ceil(count / limit);
     const countries = await Country.findAll({

@@ -15,7 +15,7 @@ import { searchCountries } from "../../store/actions"
         className="input-search"
         type="text"
         onChange={handleInputChange}
-        placeholder="Try typing... COL"
+        placeholder="Try typing: col"
       />
     </div>
   );

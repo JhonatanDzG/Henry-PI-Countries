@@ -62,7 +62,7 @@ function CreateActivityComponent({ createActivity }) {
           <label htmlFor="Name">Name:</label>
           <input
             type="text"
-            placeholder="Senderismo en montañas"
+            placeholder="Basketball"
             name="name"
             value={formData.name}
             onChange={handleChange}

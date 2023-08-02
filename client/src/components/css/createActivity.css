@@ -8,7 +8,7 @@
 }
 
 .CreateActivity-form-container {
-    height: 500px;
+    height: 530px;
     max-width: 30vw;
     min-width: 300px;
     display: flex;
@@ -17,7 +17,6 @@
     background-color: #00000099;
     border-radius: 8px;
     backdrop-filter: blur(3px);
-    margin-top: 1rem;
 }
 
 .CreateActivity-form {

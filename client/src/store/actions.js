@@ -22,9 +22,7 @@ export const getCountries = async (filters = {}) => {
 
 // Buscar países con filtros opcionales
 export const searchCountries = async (search) => {
-  const { data: payload } = await axios.get(
-    `${URL}countries?skip=${page}&search${search}`
-  );
+  const { data: payload } = await axios.get(`${URL}countries?search=${search}`);
   return {
     type: ACTIONS.search,
     payload: {
@@ -52,15 +50,32 @@ export const clearCountry = () => {
 
 //Establecer filtros de búsqueda en la lista de países
 export const filterBy = (key, value) => {
-  console.log("key, value :>>", key, value);
+  return async (dispatch, getState) => {
+    dispatch({
+      type: ACTIONS.filterBy,
+      payload: {
+        key,
+        value,
+      },
+    });
 
-  return {
+
+if(key != "skip"){
+  dispatch({
     type: ACTIONS.filterBy,
     payload: {
-      key,
-      value,
+      key: "skip",
+      value: 0,
     },
+  }); 
+}
+
+    const filters = getState().filters;
+    dispatch(await getCountries(filters));
   };
+
+  {
+  }
 };
 
 //Crear nueva Activity

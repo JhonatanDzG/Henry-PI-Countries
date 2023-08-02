@@ -3,17 +3,8 @@ import { clearCountry } from "../../store/actions";
 import { connect } from "react-redux";
 import "../css/detail.css";
 
-function Detail({ country, clear }) {
-  // const [object, setObject] = useState({});
-  // useEffect(() => {
-  //   setObject(() => country);
-  // }, [country]);
+function Detail({ country }) {
 
-  // useEffect(() => {
-  //   return () => {
-  //     clear();
-  //   };
-  // }, []);
 
   const {
     id,
@@ -39,12 +30,21 @@ function Detail({ country, clear }) {
           <h4>{`Area: ${area}`}</h4>
           <h4>{`Population: ${population}`}</h4>
           <div className="activities-container">
+            {country.Activities?.length ? (
+              <h1 className="title-activity">Activities: </h1>
+            ) : (
+              ""
+            )}
             {country.Activities
               ? country.Activities?.map((a) => {
                   return (
-                    <p key={a.name}>
-                      {a.name} | {`${a.duration} hours`}
-                    </p>
+                    <div key={a.id}>
+                      <h2>{a.name}</h2>
+                      <h4>{`Difficulty: ${a.difficulty}`}</h4>
+                      <h4>{`Duration: ${a.duration}`}</h4>
+                      <h4>{`Season: ${a.season}`}</h4>
+                      <br/>
+                    </div>
                   );
                 })
               : "nada"}

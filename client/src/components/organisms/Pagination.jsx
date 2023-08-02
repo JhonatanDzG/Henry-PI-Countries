@@ -1,14 +1,10 @@
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { filterBy, getCountries } from "../../store/actions";
+import { filterBy } from "../../store/actions";
 import "../organisms/pagination.css";
 
-function Pagination({ pagesNumber, filters, getCountries, filterBy }) {
+function Pagination({ pagesNumber, filterBy }) {
   const [pages, setPages] = useState([]);
-
-  async function getCountriesHandler() {
-    await getCountries(filters);
-  }
 
   useEffect(() => {
     setPages(() => {
@@ -24,10 +20,7 @@ function Pagination({ pagesNumber, filters, getCountries, filterBy }) {
             <button
               className="pagination-bt"
               key={i}
-              onClick={async (i) => {
-                console.log(">>", i + " "), filterBy("skip", i * 15);
-                await getCountriesHandler();
-              }}
+              onClick={async () => filterBy("skip", i * 15)}
             >
               {i + 1}
             </button>
@@ -40,15 +33,12 @@ function Pagination({ pagesNumber, filters, getCountries, filterBy }) {
 const mapStateToProps = (state) => {
   return {
     pagesNumber: state.pages,
-    filters: state.filters,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getCountries: async (page, search) =>
-      dispatch(await getCountries(page, search)),
-      filterBy: (key, value) => dispatch(filterBy(key, value))
+    filterBy: (key, value) => dispatch(filterBy(key, value)),
   };
 };
 

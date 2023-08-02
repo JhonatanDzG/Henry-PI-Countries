@@ -10,6 +10,7 @@ const getActivities = async (req, res) => {
   if (selectOnly) {
     filters = {
       attributes: ["name", "id"],
+      
     };
   }
 
