@@ -10,8 +10,16 @@ function FiltersComponent({ filterBy }) {
     continents: [],
   });
 
+  const emptyFormData = {
+    order: "",
+    continent: "",
+    activity: "",
+  };
+
+  const [formData, setFormData] = useState(emptyFormData);
+
   useEffect(() => {
-    const url = import.meta.env.VITE_APP_URL
+    const url = import.meta.env.VITE_APP_URL;
     async function getSelectables() {
       const { data: continents } = await axios.get(
         `${url}get-select-options?field=continents`
@@ -27,21 +35,34 @@ function FiltersComponent({ filterBy }) {
 
   function handleFilterBy(event) {
     const { name, value } = event.target;
+    setFormData((data) => ({
+      ...data,
+      [name]: value,
+    }));
     filterBy(name, value);
   }
+
+
+function handlerClear() {
+  filterBy("order", "");
+  filterBy("continent", "");
+  filterBy("activity", "");
+}
+
   return (
     <div className="filter">
-      <select name="order" onChange={handleFilterBy}>
-        <option selected disabled>
-          Order
-        </option>
+      <select
+        name="order"
+        onChange={handleFilterBy}
+        value={formData.order}
+      >
+        <option value={""}>Order</option>
         <option value="ASC">A-Z</option>
         <option value="DESC">Z-A</option>
       </select>
       <select name="continent" onChange={handleFilterBy}>
-        <option selected disabled>
-          Filter by continents
-        </option>
+
+        <option value={""}>Filter by continents</option>
         {selects?.continents?.length
           ? selects.continents.map((c) => (
               <option key={c.continent} value={c.continent}>
@@ -51,9 +72,7 @@ function FiltersComponent({ filterBy }) {
           : ""}
       </select>
       <select name="activity" onChange={handleFilterBy}>
-        <option selected disabled>
-          Filter By Activities
-        </option>
+        <option value={""}>Filter By Activities</option>
         {selects?.activities?.length
           ? selects.activities.map((c) => (
               <option key={c.name} value={c.id}>
@@ -62,14 +81,16 @@ function FiltersComponent({ filterBy }) {
             ))
           : ""}
       </select>
+        <button onClick={handlerClear}>clear</button>
     </div>
   );
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    filterBy:  (key, value) => dispatch( filterBy(key, value)),
+    filterBy: (key, value) => dispatch(filterBy(key, value)),
   };
 }
+
 
 export default connect(null, mapDispatchToProps)(FiltersComponent);

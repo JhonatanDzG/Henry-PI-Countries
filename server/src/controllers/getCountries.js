@@ -52,16 +52,6 @@ const getCountries = async (req, res) => {
     searchParams = {
       include,
     };
-
-    searchParams = {
-      include: {
-        model: Activity,
-        where: {
-          id: activity,
-        },
-        as: "Activities",
-      },
-    };
   }
 
   try {

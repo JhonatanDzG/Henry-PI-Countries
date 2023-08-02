@@ -16,15 +16,19 @@ function CreateActivityComponent({ createActivity }) {
 
   useEffect(() => {
     async function getSelectOptions() {
-
       const { data: countries } = await axios.get(
         `${import.meta.env.VITE_APP_URL}get-select-options`
       );
       setSelect(countries);
+      setFormData((data) => ({
+        ...data,
+        countryIds: countries?.[0]?.id,
+        season: seasons[0],
+      }));
     }
 
     getSelectOptions();
-  }, []);
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,11 +40,11 @@ function CreateActivityComponent({ createActivity }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData)
+    console.log(formData);
     await createActivity(formData);
   };
 
-  const seasons = ['spring', 'summer', 'autumn', 'winter'];
+  const seasons = ["spring", "summer", "autumn", "winter"];
 
   const capitalize = (word) => {
     const first = word[0].toUpperCase();
@@ -93,18 +97,34 @@ function CreateActivityComponent({ createActivity }) {
           />
 
           <label htmlFor="Season">Season:</label>
-          <select name="season" onChange={handleChange} defaultValue={formData.season} required>
-            {seasons.map((s)=><option key={s} value={s}>{capitalize(s)}</option>)}
+          <select
+            name="season"
+            onChange={handleChange}
+            defaultValue={formData.season}
+            required
+          >
+            {seasons.map((s) => (
+              <option key={s} value={s}>
+                {capitalize(s)}
+              </option>
+            ))}
           </select>
 
           <br />
           <label htmlFor="countryIds">Country:</label>
-          <select name="countryIds" onChange={handleChange} defaultValue={formData.countryIds} required>
+          <select
+            name="countryIds"
+            onChange={handleChange}
+            defaultValue={formData.countryIds}
+            required
+          >
             {select.length
               ? select.map((country) => {
-                  return <option key={country.id} value={country.id}>
-                    {country.name}
-                  </option>;
+                  return (
+                    <option key={country.id} value={country.id}>
+                      {country.name}
+                    </option>
+                  );
                 })
               : ""}
           </select>
@@ -117,8 +137,6 @@ function CreateActivityComponent({ createActivity }) {
     </div>
   );
 }
-
-
 
 const mapDispatchToProps = (dispatch) => {
   return {
