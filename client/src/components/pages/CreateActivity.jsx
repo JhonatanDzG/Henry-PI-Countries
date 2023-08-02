@@ -40,7 +40,6 @@ function CreateActivityComponent({ createActivity }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
     await createActivity(formData);
   };
 

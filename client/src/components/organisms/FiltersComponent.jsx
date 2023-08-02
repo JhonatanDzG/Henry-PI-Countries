@@ -28,7 +28,6 @@ function FiltersComponent({ filterBy }) {
         `${url}get-select-options?field=activities`
       );
       setSelects((data) => ({ ...data, continents, activities }));
-      console.log("selectActivities :>> ", continents);
     }
     getSelectables();
   }, []);
@@ -39,29 +38,42 @@ function FiltersComponent({ filterBy }) {
       ...data,
       [name]: value,
     }));
+
+    // switch (name) {
+    //   case "activity":
+    //     filterBy("order", "");
+    //     filterBy("continent", "");
+    //     setFormData((data)=>({...data, order: "", continent: "" }))
+    //     break
+
+    //   default:
+    //     filterBy("activity", "");
+    //     setFormData((data)=>({...data, activity: "" }))
+    //     break;
+    // }
+
     filterBy(name, value);
   }
 
-
-function handlerClear() {
-  filterBy("order", "");
-  filterBy("continent", "");
-  filterBy("activity", "");
-}
+  function handlerClear() {
+    filterBy("order", "");
+    filterBy("continent", "");
+    filterBy("activity", "");
+    setFormData(emptyFormData);
+  }
 
   return (
     <div className="filter">
-      <select
-        name="order"
-        onChange={handleFilterBy}
-        value={formData.order}
-      >
+      <select name="order" onChange={handleFilterBy} value={formData.order}>
         <option value={""}>Order</option>
         <option value="ASC">A-Z</option>
         <option value="DESC">Z-A</option>
       </select>
-      <select name="continent" onChange={handleFilterBy}>
-
+      <select
+        name="continent"
+        onChange={handleFilterBy}
+        value={formData.continent}
+      >
         <option value={""}>Filter by continents</option>
         {selects?.continents?.length
           ? selects.continents.map((c) => (
@@ -71,7 +83,7 @@ function handlerClear() {
             ))
           : ""}
       </select>
-      <select name="activity" onChange={handleFilterBy}>
+      <select name="activity" onChange={handleFilterBy} value={formData.activity}>
         <option value={""}>Filter By Activities</option>
         {selects?.activities?.length
           ? selects.activities.map((c) => (
@@ -81,7 +93,9 @@ function handlerClear() {
             ))
           : ""}
       </select>
-        <button onClick={handlerClear}>clear</button>
+      <button className="reset-button" onClick={handlerClear}>
+        resetFilters
+      </button>
     </div>
   );
 }
@@ -91,6 +105,5 @@ function mapDispatchToProps(dispatch) {
     filterBy: (key, value) => dispatch(filterBy(key, value)),
   };
 }
-
 
 export default connect(null, mapDispatchToProps)(FiltersComponent);

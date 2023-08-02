@@ -4,7 +4,6 @@ import { ACTIONS } from "../constants/action.constant";
 const URL = import.meta.env.VITE_APP_URL;
 
 export const getCountries = async (filters = {}) => {
-  console.log("filters :>> ", filters);
 
   let setQueries = "?";
 

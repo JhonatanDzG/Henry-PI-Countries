@@ -45,18 +45,12 @@ const getCountries = async (req, res) => {
       },
     ];
 
-    if (Object.keys(searchParams).length) {
-      include.push({ ...searchParams });
-    }
-
     searchParams = {
       include,
     };
   }
 
   try {
-    console.log("searchParams", searchParams);
-
     const count = await Country.count({ ...searchParams });
     const pages = Math.ceil(count / limit);
     const countries = await Country.findAll({

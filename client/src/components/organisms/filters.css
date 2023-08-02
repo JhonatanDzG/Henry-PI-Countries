@@ -1,4 +1,9 @@
-.filters{
+.filters {
     margin: auto;
     width: max-content;
+}
+
+.reset-button {
+    background: #00000099;
+    border-bottom: white;
 }
