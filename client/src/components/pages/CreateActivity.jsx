@@ -93,13 +93,13 @@ function CreateActivityComponent({ createActivity }) {
           />
 
           <label htmlFor="Season">Season:</label>
-          <select name="season" onChange={handleChange} required>
+          <select name="season" onChange={handleChange} defaultValue={formData.season} required>
             {seasons.map((s)=><option key={s} value={s}>{capitalize(s)}</option>)}
           </select>
 
           <br />
           <label htmlFor="countryIds">Country:</label>
-          <select name="countryIds" onChange={handleChange} defaultValue="pais" required>
+          <select name="countryIds" onChange={handleChange} defaultValue={formData.countryIds} required>
             {select.length
               ? select.map((country) => {
                   return <option key={country.id} value={country.id}>

@@ -35,12 +35,31 @@ const getCountries = async (req, res) => {
   }
 
   if (activity) {
+    const include = [
+      {
+        model: Activity,
+        where: {
+          id: activity,
+        },
+        as: "Activities",
+      },
+    ];
+
+    if (Object.keys(searchParams).length) {
+      include.push({ ...searchParams });
+    }
+
+    searchParams = {
+      include,
+    };
+
     searchParams = {
       include: {
         model: Activity,
         where: {
           id: activity,
-        }, as: "Activities"
+        },
+        as: "Activities",
       },
     };
   }

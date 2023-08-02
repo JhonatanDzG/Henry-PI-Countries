@@ -1,21 +1,17 @@
-import "./filters.css";
-import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import "./filters.css";
 import { filterBy } from "../../store/actions";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 function FiltersComponent({ filterBy }) {
-  const url = import.meta.env.VITE_APP_URL;
-
-  const [selects, setSelects] = useState(
-    {
-      activities: [],
-      continents: [],
-    },
-    []
-  );
+  const [selects, setSelects] = useState({
+    activities: [],
+    continents: [],
+  });
 
   useEffect(() => {
+    const url = import.meta.env.VITE_APP_URL
     async function getSelectables() {
       const { data: continents } = await axios.get(
         `${url}get-select-options?field=continents`
@@ -23,56 +19,47 @@ function FiltersComponent({ filterBy }) {
       const { data: activities } = await axios.get(
         `${url}get-select-options?field=activities`
       );
-
-      console.log("selectActivities >>", continents, activities);
-
-      setSelects((data) => ({
-        ...data,
-        continents,
-        activities,
-      }));
+      setSelects((data) => ({ ...data, continents, activities }));
+      console.log("selectActivities :>> ", continents);
     }
-
     getSelectables();
   }, []);
 
-  function handlerFilterBy(event) {
+  function handleFilterBy(event) {
     const { name, value } = event.target;
     filterBy(name, value);
   }
-
   return (
-    <div className="filters">
-
-      <select name="order" onChange={handlerFilterBy}>
-        <option select disabled >Order</option> 
-        <option value="ASC">
-          A-Z
+    <div className="filter">
+      <select name="order" onChange={handleFilterBy}>
+        <option selected disabled>
+          Order
         </option>
+        <option value="ASC">A-Z</option>
         <option value="DESC">Z-A</option>
       </select>
-      <select name="continent" onChange={handlerFilterBy}>
-      <option select disabled >Order</option> 
+      <select name="continent" onChange={handleFilterBy}>
+        <option selected disabled>
+          Filter by continents
+        </option>
         {selects?.continents?.length
-          ? selects.continents.map((c) => {
-              return (
-                <option key={c.continent} value={c.continent}>
-                  {c.continent}
-                </option>
-              );
-            })
+          ? selects.continents.map((c) => (
+              <option key={c.continent} value={c.continent}>
+                {c.continent}
+              </option>
+            ))
           : ""}
       </select>
-      <select name="activity" onChange={handlerFilterBy}>
-      <option select disabled >Filter by Activity</option> 
-        {selects?.activity?.length
-          ? selects.activity.map((c) => {
-              return (
-                <option key={c.name} value={c.id}>
-                  {c.name}
-                </option>
-              );
-            })
+      <select name="activity" onChange={handleFilterBy}>
+        <option selected disabled>
+          Filter By Activities
+        </option>
+        {selects?.activities?.length
+          ? selects.activities.map((c) => (
+              <option key={c.name} value={c.id}>
+                {c.name}
+              </option>
+            ))
           : ""}
       </select>
     </div>
@@ -81,7 +68,7 @@ function FiltersComponent({ filterBy }) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    filterBy: (key, value) => dispatch(filterBy(key, value)),
+    filterBy:  (key, value) => dispatch( filterBy(key, value)),
   };
 }
 

@@ -5,7 +5,9 @@ import axios from "axios";
 import { ROUTES } from "../../constants/routes.constant";
 
 export default function LandingPage() {
+
   const url = import.meta.env.VITE_APP_URL;
+  
   useEffect(() => {
     async function setApiCountries() {
       await axios.get(url);
