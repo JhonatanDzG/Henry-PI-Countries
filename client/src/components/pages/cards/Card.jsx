@@ -6,7 +6,7 @@ import { ROUTES } from '../../../constants/routes.constant';
 
 function Card({country, getCountry}) {
   
-  const {id, name, flagImage, continent} = country
+  const {id, name, flagImage, continent, population} = country
 
   return (
     <div className="card">
@@ -17,6 +17,8 @@ function Card({country, getCountry}) {
       <h3 onClick={async ()=> await getCountry(id)}>{name}</h3>
       </Link>
       <h4>{continent}</h4>
+      <h4>{population}</h4>
+
     </div>
 
     </div>

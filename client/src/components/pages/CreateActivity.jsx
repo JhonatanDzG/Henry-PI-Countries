@@ -2,6 +2,8 @@ import "../css/createActivity.css";
 import { useState, useEffect } from "react";
 import { createActivity } from "../../store/actions";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { ROUTES } from "../../constants/routes.constant";
 import axios from "axios";
 
 function CreateActivityComponent({ createActivity }) {
@@ -28,10 +30,28 @@ function CreateActivityComponent({ createActivity }) {
     }
 
     getSelectOptions();
-  });
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
+    if (name === "name" && value.trim() !== "") {
+      const onlyLetters = /^[A-Za-z\s]+$/;
+      const maxLength = 20;
+
+      if (!onlyLetters.test(value)) {
+        console.log("!onlyLetters");
+        return window.alert(
+          "The input does not allow special characters or numbers"
+        );
+      } else if (value.length > maxLength) {
+        console.log("Exceeded maximum length");
+        return window.alert(
+          `The input must not exceed ${maxLength} characters`
+        );
+      }
+    }
+
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -40,7 +60,9 @@ function CreateActivityComponent({ createActivity }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     await createActivity(formData);
+    window.location.href = ROUTES.home;
   };
 
   const seasons = ["spring", "summer", "autumn", "winter"];
@@ -129,8 +151,9 @@ function CreateActivityComponent({ createActivity }) {
           </select>
 
           <br />
-
-          <input className="submit" type="submit" value="Send" />
+          <button className="submit" type="submit">
+            Send
+          </button>
         </form>
       </div>
     </div>
