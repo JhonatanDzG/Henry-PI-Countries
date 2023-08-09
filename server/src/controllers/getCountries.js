@@ -18,10 +18,17 @@ const getCountries = async (req, res) => {
   }
 
   if (order) {
-    searchParams = {
-      ...searchParams,
-      order: [["name", order]],
-    };
+    if (order.includes("PO-")) {
+      searchParams = {
+        ...searchParams,
+        order: [["population", order.split("-")[1]]],
+      };
+    } else {
+      searchParams = {
+        ...searchParams,
+        order: [["name", order]],
+      };
+    }
   }
 
   if (continent) {

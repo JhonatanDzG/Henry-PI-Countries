@@ -39,19 +39,6 @@ function FiltersComponent({ filterBy }) {
       [name]: value,
     }));
 
-    // switch (name) {
-    //   case "activity":
-    //     filterBy("order", "");
-    //     filterBy("continent", "");
-    //     setFormData((data)=>({...data, order: "", continent: "" }))
-    //     break
-
-    //   default:
-    //     filterBy("activity", "");
-    //     setFormData((data)=>({...data, activity: "" }))
-    //     break;
-    // }
-
     filterBy(name, value);
   }
 
@@ -68,8 +55,8 @@ function FiltersComponent({ filterBy }) {
         <option value={""}>Order</option>
         <option value="ASC">A-Z</option>
         <option value="DESC">Z-A</option>
-        <option value="PO-DESC">Population ⇂</option>
-        <option value="PO-ASC">Population ↾</option>
+        <option value="PO-DESC">Population ↾</option>
+        <option value="PO-ASC">Population ⇂</option>
       </select>
       <select
         name="continent"
@@ -85,7 +72,11 @@ function FiltersComponent({ filterBy }) {
             ))
           : ""}
       </select>
-      <select name="activity" onChange={handleFilterBy} value={formData.activity}>
+      <select
+        name="activity"
+        onChange={handleFilterBy}
+        value={formData.activity}
+      >
         <option value={""}>Filter By Activities</option>
         {selects?.activities?.length
           ? selects.activities.map((c) => (

@@ -56,6 +56,7 @@ function CreateActivityComponent({ createActivity }) {
       return;
     }
 
+
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
