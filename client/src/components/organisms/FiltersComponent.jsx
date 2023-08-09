@@ -68,6 +68,8 @@ function FiltersComponent({ filterBy }) {
         <option value={""}>Order</option>
         <option value="ASC">A-Z</option>
         <option value="DESC">Z-A</option>
+        <option value="PO-DESC">Population ⇂</option>
+        <option value="PO-ASC">Population ↾</option>
       </select>
       <select
         name="continent"

@@ -51,6 +51,10 @@ function CreateActivityComponent({ createActivity }) {
         );
       }
     }
+    if (name === "difficulty" && parseInt(value) > 15 ) {
+      showDifficultyError();
+      return;
+    }
 
     setFormData((prevData) => ({
       ...prevData,
@@ -105,6 +109,7 @@ function CreateActivityComponent({ createActivity }) {
             onChange={handleChange}
             required
           />
+
 
           <label htmlFor="Duration">Duration(hours):</label>
           <input
