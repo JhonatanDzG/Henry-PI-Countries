@@ -1,14 +1,17 @@
 import "../css/createActivity.css";
 import { useState, useEffect } from "react";
-import { createActivity } from "../../store/actions";
+import { createActivity, notify } from "../../store/actions";
 import { connect } from "react-redux";
 import { ROUTES } from "../../constants/routes.constant";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-function CreateActivityComponent({ createActivity }) {
+function CreateActivityComponent({ createActivity, notify }) {
   const [select, setSelect] = useState([]);
   const [custom, setCustom] = useState(true);
   const [activities, setActivities] = useState([]);
+  const [hasErrors, setHasErrors] = useState(false);
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -16,6 +19,12 @@ function CreateActivityComponent({ createActivity }) {
     duration: "",
     season: "",
     countryIds: "",
+  });
+
+  const [formErrors, setFormErrors] = useState({
+    name: "",
+    difficulty: "",
+    duration: "",
   });
 
   useEffect(() => {
@@ -51,7 +60,6 @@ function CreateActivityComponent({ createActivity }) {
         name: "",
       }));
       return setCustom(true);
-
     } else {
       return setCustom(false);
     }
@@ -60,38 +68,33 @@ function CreateActivityComponent({ createActivity }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === "name" && value.trim() !== "") {
-      const onlyLetters = /^[A-Za-z\s]+$/;
-      const maxLength = 20;
-
-      if (!onlyLetters.test(value)) {
-        console.log("!onlyLetters");
-        return window.alert(
-          "The input does not allow special characters or numbers"
-        );
-      } else if (value.length > maxLength) {
-        console.log("Exceeded maximum length");
-        return window.alert(
-          `The input must not exceed ${maxLength} characters`
-        );
-      }
-    }
-    if (name === "difficulty" && parseInt(value) > 15) {
-      showDifficultyError();
-      return;
-    }
-
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
+
+    handlerErrors(name, value);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await createActivity(formData);
-    window.location.href = ROUTES.home;
+    try {
+      await createActivity(formData);
+
+      navigate(ROUTES.home);
+      notify({
+        title: "Activity Created",
+        content: "Succes",
+        type: "success",
+      });
+    } catch (error) {
+      notify({
+        title: "error:>> " + error,
+        content: "Error",
+        type: "error",
+      });
+    }
   };
 
   const seasons = ["spring", "summer", "autumn", "winter"];
@@ -101,6 +104,52 @@ function CreateActivityComponent({ createActivity }) {
     const res = word.slice(1).toLowerCase();
     return first + res;
   };
+
+  useEffect(() => {
+    setHasErrors(Object.values(formErrors).some((error) => !!error.length));
+  }, [formData]);
+
+  function handlerErrors(name, value) {
+    const onlyLetters = /^[A-Za-z\s]+$/;
+    const rangeDifficulty = [1, 15];
+    const rangeDuration = [1, 12];
+
+    switch (name) {
+      case "name":
+        if (!value) {
+          return setFormErrors((errors) => ({
+            ...errors,
+            name: "Name is required",
+          }));
+        }
+
+        if (!onlyLetters.test(value)) {
+          return setFormErrors((errors) => ({
+            ...errors,
+            name: "Name must be ONLY letters",
+          }));
+        }
+        return setFormErrors((errors) => ({ ...errors, name: "" }));
+
+      case "difficulty":
+        if (value < rangeDifficulty[0] || value > rangeDifficulty[1]) {
+          return setFormErrors((errors) => ({
+            ...errors,
+            difficulty: "Range: 1-15",
+          }));
+        }
+        return setFormErrors((errors) => ({ ...errors, difficulty: "" }));
+
+      case "duration":
+        if (value < rangeDuration[0] || value > rangeDuration[1]) {
+          return setFormErrors((errors) => ({
+            ...errors,
+            duration: "Range: 1-12 horas",
+          }));
+        }
+        return setFormErrors((errors) => ({ ...errors, duration: "" }));
+    }
+  }
 
   return (
     <div className="createActivity-container">
@@ -126,14 +175,17 @@ function CreateActivityComponent({ createActivity }) {
           </select>
 
           {custom ? (
-            <input
-              type="text"
-              placeholder="Basketball"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
+            <>
+              <input
+                type="text"
+                placeholder="Basketball"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+              <span className="error">{formErrors.name}</span>
+            </>
           ) : (
             ""
           )}
@@ -151,6 +203,7 @@ function CreateActivityComponent({ createActivity }) {
                 onChange={handleChange}
                 required
               />
+              <span className="error">{formErrors.difficulty}</span>
             </>
           ) : (
             ""
@@ -168,6 +221,7 @@ function CreateActivityComponent({ createActivity }) {
                 onChange={handleChange}
                 required
               />
+              <span className="error">{formErrors.duration}</span>
             </>
           ) : (
             ""
@@ -213,7 +267,11 @@ function CreateActivityComponent({ createActivity }) {
           </select>
 
           <br />
-          <button className="submit" type="submit">
+          <button
+            className="submit"
+            type="submit"
+            disabled={hasErrors || !formData.name}
+          >
             Send
           </button>
         </form>
@@ -226,6 +284,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     createActivity: async (activity) =>
       dispatch(await createActivity(activity)),
+
+    notify: (message) => dispatch(notify(message)),
   };
 };
 

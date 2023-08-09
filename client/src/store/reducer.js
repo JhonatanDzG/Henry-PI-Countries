@@ -1,3 +1,4 @@
+import "../components/css/cards/notify.css"
 import { ACTIONS } from "../constants/action.constant";
 
 // Estado inicial del store de Redux
@@ -10,6 +11,12 @@ const initialState = {
     skip: "",
     order: "",
   },
+  notify: {
+    title : "",
+    content: "",
+    type: ""
+    
+  }
 };
 
 // Reducer que debería actualizar el estado global de la aplicación
@@ -64,10 +71,23 @@ const reducer = (state = initialState, action) => {
         },
       };
 
+      case ACTIONS.notify:
+        return {
+          ...state,
+          notify: {
+            title: action.payload.title,
+            type: action.payload.type,
+            content: action.payload.content,
+
+          }
+        }
+
     default:
       // Retornar el estado actual
       return state;
   }
 };
+
+
 
 export default reducer;

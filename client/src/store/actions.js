@@ -86,3 +86,10 @@ export const createActivity = async (activity) => {
     payload,
   };
 };
+
+export const notify = (message) => {
+  return {
+    type: ACTIONS.notify,
+    payload: message
+  }
+}

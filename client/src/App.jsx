@@ -2,12 +2,14 @@ import Nav from "./components/nav/Nav.jsx";
 
 import { Outlet } from "react-router-dom";
 import "./App.css";
+import Notify from "./components/pages/cards/Notify.jsx";
 
 function App() {
   return (
     <div className="App">
       <Nav />
-        <Outlet />
+      <Notify />
+      <Outlet />
     </div>
   );
 }

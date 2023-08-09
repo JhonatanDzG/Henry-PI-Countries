@@ -49,6 +49,7 @@ function FiltersComponent({ filterBy }) {
     setFormData(emptyFormData);
   }
 
+
   return (
     <div className="filter">
       <select name="order" onChange={handleFilterBy} value={formData.order}>

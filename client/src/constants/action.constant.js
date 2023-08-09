@@ -5,6 +5,7 @@ export const ACTIONS = {
     search: "[COUNTRIES] search",
     clearCountry: "[COUNTRY] Clear",
     createActivity: "[ACTIVITY] Create",
-    filterBy: "[COUNTRIES] Filter By"
+    filterBy: "[COUNTRIES] Filter By",
+    notify: "[NOTiFY] notify"
 }
 
